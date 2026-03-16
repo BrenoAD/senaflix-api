@@ -79,6 +79,18 @@ app.get("/filmes", function(req, res){
     res.json(filmesFiltrados)
 });
 
+app.get("/filmes/:id", function(req, res){
+    const id = req.params.id
+
+    const filmesFiltrados = filmes.find(f => f.id == id)
+    if (!filmes){
+        return res.status(404).json({erro: "Filme não encontrado"})
+    }
+    
+    
+    res.json(filmesFiltrados)
+});
+
 app.get("/series", function(req, res){
     const genre = req.query.genre
 
@@ -88,6 +100,17 @@ app.get("/series", function(req, res){
     const seriesFiltradas = series.filter(s => s.genre == genre)
     
     res.json(seriesFiltradas)
+});
+
+app.get("/series/:id", function(req, res){
+    const id = req.params.id
+    const seriesFiltradas = series.find(s => s.id == id)
+    if (!series){
+        return res.status(404).json({erro: "Series não encontrado"})
+    }
+    
+    return res.json(seriesFiltradas)
+    
 });
 
 
